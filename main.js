@@ -47,98 +47,94 @@ function getTodosAlunos() { // pega todos os alunos
 }
 
 function getAlunosPelaMatricula(matricula) {
-   
+
     let listaMatriculaArray = []
     let listaMatriculaJSON = {}
     let status
     alunosJSON.forEach(function (pegarAluno) {
         if (pegarAluno.matricula == matricula) {
             listaMatriculaArray.push({
-                nome:pegarAluno.nome,
-                foto:pegarAluno.foto,
-                matricula:pegarAluno.matricula,
-                sexo:pegarAluno.sexo
+                nome: pegarAluno.nome,
+                foto: pegarAluno.foto,
+                matricula: pegarAluno.matricula,
+                sexo: pegarAluno.sexo
 
             })
             listaMatriculaJSON.aluno = listaMatriculaArray
-            
+
         }
 
         status = true
     })
-    if(status){
+    if (status) {
         return listaMatriculaJSON
-    }else{
+    } else {
         return status = false
     }
 }
 
-function getAlunosPeloCurso(cursoSigla){
-    
+function getAlunosPeloCurso(cursoSigla) {
+
     let listaAlunosPeloCursoArray = []
     let listaAlunosPeloCursoJSON = {}
     let status
-   
-    alunosJSON.forEach(function (pegarAlunos){
-        pegarAlunos.curso.forEach(function(pegarCursos){
-            if(pegarCursos.sigla == cursoSigla.toUpperCase()){
+
+    alunosJSON.forEach(function (pegarAlunos) {
+        pegarAlunos.curso.forEach(function (pegarCursos) {
+            if (pegarCursos.sigla == cursoSigla.toUpperCase()) {
                 listaAlunosPeloCursoArray.push({
-                    nome:pegarAlunos.nome,
-                    foto:pegarAlunos.foto,
-                    matricula:pegarAlunos.matricula,
-                    sexo:pegarAlunos.sexo
+                    nome: pegarAlunos.nome,
+                    foto: pegarAlunos.foto,
+                    matricula: pegarAlunos.matricula,
+                    sexo: pegarAlunos.sexo
                 })
                 listaAlunosPeloCursoJSON.curso = listaAlunosPeloCursoArray
-                
+
                 status = true
             }
         })
     })
 
-    if(status){
+    if (status) {
         return listaAlunosPeloCursoJSON
-    }else{
+    } else {
         return status = false
     }
 }
 
 
 
-function getAlunosStatus(situação){
+
+function getALunoStatus(situacao) {
     let listaAlunosPelaSituacaoArray = []
     let listaAlunosPelaSituacaoJSON = {}
     let status = false
-    situação = situação.toLowerCase()
 
-    alunosJSON.forEach(function (pegarAlunos){
-        pegarAlunos.curso.forEach(function(pegarCursos){
-           pegarCursos.disciplinas.forEach(function(pegarStatus){
-             //  const statusDoAluno =  pegarStatus.toLowerCase()
-               if(typeof pegarStatus.status === 'string' && pegarStatus.status.toLowerCase() === situação){
-                listaAlunosPelaSituacaoArray.push({
-                    nome:pegarAlunos.nome,
-                    foto:pegarAlunos.foto,
-                    matricula:pegarAlunos.matricula,
-                    sexo:pegarAlunos.sexo
-                })
-                listaAlunosPelaSituacaoJSON.status = listaAlunosPelaSituacaoArray
-                status = true
-               }
-           })
-                
-                
-           
-        })
+    alunosJSON.forEach(function (pegarAlunos) {
+
+        if (typeof pegarAlunos.status === 'string' && pegarAlunos.status.toUpperCase() === situacao.toUpperCase()) {
+            listaAlunosPelaSituacaoArray.push({
+                nome: pegarAlunos.nome,
+                foto: pegarAlunos.foto,
+                matricula: pegarAlunos.matricula,
+                sexo: pegarAlunos.sexo
+
+            })
+        }
+        listaAlunosPelaSituacaoJSON.status = listaAlunosPelaSituacaoArray
+        status = true
+
     })
 
-    if(status){
+    if (status) {
         return listaAlunosPelaSituacaoJSON
-    }else{
+    } else {
         return status = false
     }
-
-   
 }
+
+
+
 
 
 function getCursoSigla(matricula) { // pega a média e as disciplina de um aluno pela matricula
@@ -157,10 +153,10 @@ function getCursoSigla(matricula) { // pega a média e as disciplina de um aluno
                         separar += sigla[i][0].toUpperCase();
                     }
                     listaCursoSiglaArray.push({
-                        sigla:separar
+                        sigla: separar
                     });
                     listaMediaArray.push({
-                        media:nomeCursoSigla.media
+                        media: nomeCursoSigla.media
                     });
                     listaMediaJSON = listaMediaArray
                     listaCursoJSON = listaCursoSiglaArray
@@ -189,6 +185,6 @@ module.exports = {
     getTodosAlunos,
     getAlunosPelaMatricula,
     getAlunosPeloCurso,
-    getAlunosStatus,
+    getALunoStatus,
     getCursoSigla
 }
