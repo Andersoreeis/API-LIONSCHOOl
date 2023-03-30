@@ -73,34 +73,48 @@ app.get('/v1/lion-school/alunos/:matricula', cors(), async function (request, re
     
 
 })
-app.get('/v1/lion-school/alunos/:curso',  cors(), async function (request, response, next){
+app.get('/v1/lion-school/alunos',  cors(), async function (request, response, next){
 
     let statusCode
-    let dadosAlunosPeloCurso = {}
+    let dadosAlunosPeloCursoEStatus = {}
     let siglaCurso = request.query.curso
+    let status = request.query.situacao
+  
     if(siglaCurso == '' || siglaCurso == undefined || siglaCurso == !isNaN(siglaCurso)){
-        statusCode = 400
-        dadosAlunosMatriculados.message = 'Não foi possivel processar pois os dados de entrada (sigla do curso) não corresponde ao exígido, confira o valor pois não pode ser vázio, e precisa ser caracteres e ter dois digitos.'
+        
+        if(status == '' || status == undefined || status == !isNaN(status)){
+            statusCode = 400
+            dadosAlunosPeloCursoEStatus.message = 'Não foi possivel processar pois os dados de entrada (sigla do curso) não corresponde ao exígido, confira o valor pois não pode ser vázio, e precisa ser caracteres e ter dois digitos.'
 
+        }else{
+            let dadosAluno = getsCursosEAlunos.getAlunosStatus(status)
+            if(dadosAluno){
+                statusCode = 200
+                dadosAlunosPeloCursoEStatus = dadosAluno
+            }else{
+                statusCode = 400
+            }
+            
+        }
     }else{
         let dadosAluno = getsCursosEAlunos.getAlunosPeloCurso(siglaCurso)
         if(dadosAluno){
             statusCode = 200
-            dadosAlunosPeloCurso = dadosAluno
+            dadosAlunosPeloCursoEStatus = dadosAluno
         }else{
             statusCode = 400
         }
     }
     response.status(statusCode)
-    response.json(dadosAlunosPeloCurso)
+    response.json(dadosAlunosPeloCursoEStatus)
 })
 
 
-app.get('/v1/lion-school/alunos/:status',  cors(), async function (request, response, next){
+app.get('/v1/lion-school/alunos/status',  cors(), async function (request, response, next){
 
-    let statusCode
+    let statusCodeSituaca
     let dadosAlunosPeloStatus = {}
-    let situacao = request.query.status
+    let situacao = request.query.situacao
     if(situacao == '' || situacao == undefined || situacao == !isNaN(situacao)){
         statusCode = 400
         dadosAlunosPeloStatus.message = 'Não foi possivel processar pois os dados de entrada (status) não corresponde ao exígido, confira o valor pois não pode ser vázio, e precisa ser caracteres e ter dois digitos.'
@@ -119,7 +133,7 @@ app.get('/v1/lion-school/alunos/:status',  cors(), async function (request, resp
 })
 
 
-app.get('/v1/lion-school/alunos/:matriculasigla',  cors(), async function (request, response, next){
+app.get('/v1/lion-school/alunos/matricula/:matriculasigla',  cors(), async function (request, response, next){
 
     let statusCode
     let materiasAluno = {}

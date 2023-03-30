@@ -7,13 +7,15 @@ const alunosJSON = require("./alunos.js")
 
 function getCursos() { // pega todos os cursos
     let listaCursosArray = []
+    let listaCursoJSON = {}
     let status
     cursosJSON.forEach(function (pegarCurso) {
         listaCursosArray.push(pegarCurso)
+        listaCursoJSON.cursos = listaCursosArray
         status = true
     })
     if (status) {
-        return listaCursosArray
+        return listaCursoJSON
     } else {
         status = false
     }
@@ -21,116 +23,129 @@ function getCursos() { // pega todos os cursos
 
 function getTodosAlunos() { // pega todos os alunos
     let listaTodosAlunosArray = []
+    let listaTodosAlunosJSON = {}
     let status
 
     alunosJSON.forEach(function (pegarAluno) {
 
 
-        listaTodosAlunosArray.push(pegarAluno.nome)
-        listaTodosAlunosArray.push(pegarAluno.foto)
-        listaTodosAlunosArray.push(pegarAluno.matricula)
-        listaTodosAlunosArray.push(pegarAluno.sexo)
+        listaTodosAlunosArray.push({
+            nome: pegarAluno.nome,
+            foto: pegarAluno.foto,
+            matricula: pegarAluno.matricula,
+            sexo: pegarAluno.sexo
+        });
+        listaTodosAlunosJSON.alunos = listaTodosAlunosArray
         status = true
     })
     if (status) {
-        return listaTodosAlunosArray
+        return listaTodosAlunosJSON
     } else {
         return status = false
     }
 
 }
 
-function getAlunosPelaMatricula(matricula) { //pega o aluno especifico pela matricla
-    matricula.toUpperCase()
+function getAlunosPelaMatricula(matricula) {
+   
     let listaMatriculaArray = []
+    let listaMatriculaJSON = {}
     let status
     alunosJSON.forEach(function (pegarAluno) {
         if (pegarAluno.matricula == matricula) {
-            listaMatriculaArray.push(pegarAluno.nome)
-            listaMatriculaArray.push(pegarAluno.foto)
-            listaMatriculaArray.push(pegarAluno.matricula)
-            listaMatriculaArray.push(pegarAluno.sexo)
+            listaMatriculaArray.push({
+                nome:pegarAluno.nome,
+                foto:pegarAluno.foto,
+                matricula:pegarAluno.matricula,
+                sexo:pegarAluno.sexo
+
+            })
+            listaMatriculaJSON.aluno = listaMatriculaArray
+            
         }
 
         status = true
     })
-    if (status) {
-        return listaMatriculaArray
-    } else {
+    if(status){
+        return listaMatriculaJSON
+    }else{
         return status = false
     }
 }
 
-function getAlunosPeloCurso(cursoSigla) { // pega os alunos que estão em determinado curso
-    cursoSigla.toUpperCase()
-    let listaAlunosPeloCurso = []
-    let listaAlunosJSON = {}
+function getAlunosPeloCurso(cursoSigla){
+    
+    let listaAlunosPeloCursoArray = []
+    let listaAlunosPeloCursoJSON = {}
     let status
-
-    alunosJSON.forEach(function (pegarAlunos) {
-        pegarAlunos.curso.forEach(function (pegarCursos) {
-            if (pegarCursos.sigla == cursoSigla) {
-                // listaAlunosJSON.nome = pegarAlunos.nome
-                // listaAlunosJSON.foto = pegarAlunos.foto
-                // listaAlunosJSON.matricula = pegarAlunos.matricula
-                // listaAlunosJSON.sexo = pegarAlunos.sexo
+   
+    alunosJSON.forEach(function (pegarAlunos){
+        pegarAlunos.curso.forEach(function(pegarCursos){
+            if(pegarCursos.sigla == cursoSigla.toUpperCase()){
+                listaAlunosPeloCursoArray.push({
+                    nome:pegarAlunos.nome,
+                    foto:pegarAlunos.foto,
+                    matricula:pegarAlunos.matricula,
+                    sexo:pegarAlunos.sexo
+                })
+                listaAlunosPeloCursoJSON.curso = listaAlunosPeloCursoArray
                 
-                // listaAlunosPeloCurso.push(listaAlunosJSON.nome)
-                // listaAlunosPeloCurso.push(listaAlunosJSON.foto)
-                // listaAlunosPeloCurso.push(listaAlunosJSON.matricula)
-                // listaAlunosPeloCurso.push(listaAlunosJSON.sexo)
-
-
-
                 status = true
             }
         })
     })
 
-    if (status) {
-        return listaAlunosJSON
-    } else {
+    if(status){
+        return listaAlunosPeloCursoJSON
+    }else{
         return status = false
     }
 }
-console.log(getAlunosPeloCurso('RDS'));
 
 
-function getAlunosStatus(situação) { // pega o aluno que estão aprovado ou reprovado ou concluido
-    let listaAlunosPelaSituação = []
+
+function getAlunosStatus(situação){
+    let listaAlunosPelaSituacaoArray = []
+    let listaAlunosPelaSituacaoJSON = {}
     let status = false
     situação = situação.toLowerCase()
 
-    alunosJSON.forEach(function (pegarAlunos) {
-        pegarAlunos.curso.forEach(function (pegarCursos) {
-            pegarCursos.disciplinas.forEach(function (pegarStatus) {
-                //  const statusDoAluno =  pegarStatus.toLowerCase()
-                if (typeof pegarStatus.status === 'string' && pegarStatus.status.toLowerCase() === situação) {
-                    listaAlunosPelaSituação.push(pegarAlunos.nome)
-                    listaAlunosPelaSituação.push(pegarAlunos.foto)
-                    listaAlunosPelaSituação.push(pegarAlunos.matricula)
-                    listaAlunosPelaSituação.push(pegarAlunos.sexo)
-                    status = true
-                }
-            })
-
-
-
+    alunosJSON.forEach(function (pegarAlunos){
+        pegarAlunos.curso.forEach(function(pegarCursos){
+           pegarCursos.disciplinas.forEach(function(pegarStatus){
+             //  const statusDoAluno =  pegarStatus.toLowerCase()
+               if(typeof pegarStatus.status === 'string' && pegarStatus.status.toLowerCase() === situação){
+                listaAlunosPelaSituacaoArray.push({
+                    nome:pegarAlunos.nome,
+                    foto:pegarAlunos.foto,
+                    matricula:pegarAlunos.matricula,
+                    sexo:pegarAlunos.sexo
+                })
+                listaAlunosPelaSituacaoJSON.status = listaAlunosPelaSituacaoArray
+                status = true
+               }
+           })
+                
+                
+           
         })
     })
 
-    if (status) {
-        return listaAlunosPelaSituação
-    } else {
+    if(status){
+        return listaAlunosPelaSituacaoJSON
+    }else{
         return status = false
     }
 
-
+   
 }
 
+
 function getCursoSigla(matricula) { // pega a média e as disciplina de um aluno pela matricula
-    let listaCursoSigla = [];
-    let listaMedia = [];
+    let listaCursoSiglaArray = [];
+    let listaMediaArray = [];
+    let listaMediaJSON = {}
+    let listaCursoJSON = {}
     let status = false;
     alunosJSON.forEach(function (pegarAlunos) {
         pegarAlunos.curso.forEach(function (pegarCurso) {
@@ -141,8 +156,14 @@ function getCursoSigla(matricula) { // pega a média e as disciplina de um aluno
                     for (let i = 0; i < sigla.length; i++) {
                         separar += sigla[i][0].toUpperCase();
                     }
-                    listCursoSigla.push(separar);
-                    listaMedia.push(nomeCursoSigla.media);
+                    listaCursoSiglaArray.push({
+                        sigla:separar
+                    });
+                    listaMediaArray.push({
+                        media:nomeCursoSigla.media
+                    });
+                    listaMediaJSON = listaMediaArray
+                    listaCursoJSON = listaCursoSiglaArray
 
                     status = true;
                 }
@@ -152,13 +173,16 @@ function getCursoSigla(matricula) { // pega a média e as disciplina de um aluno
 
     if (status) {
         return {
-            listCursoSigla,
-            listaMedia
+            listaMediaJSON,
+            listaCursoJSON
         }
     } else {
         return false;
     }
 }
+
+
+
 
 module.exports = {
     getCursos,
