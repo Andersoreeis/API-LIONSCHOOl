@@ -63,7 +63,7 @@ app.get('/v1/lion-school/alunos/:matricula', cors(), async function (request, re
 
 
 })
-app.get('/v1/lion-school/alunoss', cors(), async function (request, response, next) {
+app.get('/v1/lion-school/alunos', cors(), async function (request, response, next) {
 
     let statusCode
     let dadosAlunosPeloCursoEStatus = {}
@@ -106,11 +106,11 @@ app.get('/v1/lion-school/alunoss', cors(), async function (request, response, ne
     response.json(dadosAlunosPeloCursoEStatus)
 })
 
-app.get('/v1/lion-school/alunos/matricula/:matriculasigla', cors(), async function (request, response, next) {
+app.get('/v1/lion-school/alunos/mediaCurso/:matricula', cors(), async function (request, response, next) {
 
     let statusCode
     let materiasAluno = {}
-    let matricula = request.query.matriculasigla
+    let matricula = request.params.matricula
     if (matricula == '' || matricula == undefined || matricula == isNaN(matricula)) {
         statusCode = 400
         materiasAluno.message = 'Não foi possivel processar pois os dados de entrada (status) não corresponde ao exígido, confira o valor pois não pode ser vázio, e precisa ser caracteres e ter dois digitos.'

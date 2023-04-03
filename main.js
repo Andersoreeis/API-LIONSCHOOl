@@ -142,7 +142,8 @@ function getCursoSigla(matricula) { // pega a média e as disciplina de um aluno
     let listaMediaArray = [];
     let listaMediaJSON = {}
     let listaCursoJSON = {}
-    let status = false;
+    let listaDeMateriasEMedia = {}
+    let status = false ;
     alunosJSON.forEach(function (pegarAlunos) {
         pegarAlunos.curso.forEach(function (pegarCurso) {
             pegarCurso.disciplinas.forEach(function (nomeCursoSigla) {
@@ -160,6 +161,8 @@ function getCursoSigla(matricula) { // pega a média e as disciplina de um aluno
                     });
                     listaMediaJSON = listaMediaArray
                     listaCursoJSON = listaCursoSiglaArray
+                    listaDeMateriasEMedia.media = listaMediaJSON
+                    listaDeMateriasEMedia.materias = listaCursoJSON
 
                     status = true;
                 }
@@ -168,14 +171,13 @@ function getCursoSigla(matricula) { // pega a média e as disciplina de um aluno
     });
 
     if (status) {
-        return {
-            listaMediaJSON,
-            listaCursoJSON
-        }
+        return listaDeMateriasEMedia
     } else {
-        return false;
+        return status = false;
     }
 }
+
+
 
 
 
