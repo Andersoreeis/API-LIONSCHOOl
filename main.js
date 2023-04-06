@@ -88,7 +88,8 @@ function getAlunosPeloCurso(cursoSigla) {
                     matricula: pegarAlunos.matricula,
                     sexo: pegarAlunos.sexo,
                     status: pegarAlunos.status,
-                    nomeCurso: pegarCursos.nome
+                    nomeCurso: pegarCursos.nome,
+                    ano:pegarAlunos.conclusao
                 })
                 listaAlunosPeloCursoJSON.curso = listaAlunosPeloCursoArray
 
