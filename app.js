@@ -70,22 +70,13 @@ app.get('/v1/lion-school/alunos', cors(), async function (request, response, nex
     let siglaCurso = request.query.curso
     let status = request.query.situacao
 
-    if (siglaCurso != undefined ||  !isNaN(siglaCurso)) {
+    if (siglaCurso != undefined ||  !isNaN(siglaCurso) && status != undefined || status == !isNaN(status)) {
 
-        let dadosAluno = getsCursosEAlunos.getAlunosPeloCurso(siglaCurso)
+        let dadosAluno = getsCursosEAlunos.getAlunosPeloCurso(siglaCurso, status)
         if (dadosAluno) {
             statusCode = 200
             dadosAlunosPeloCursoEStatus = dadosAluno
 
-        } else {
-            statusCode = 400
-        }
-
-    } else if ( status != undefined || status == !isNaN(status)) {
-        let dadosStatus = getsCursosEAlunos.getALunoStatus(status)
-        if (dadosStatus) {
-            statusCode = 200
-            dadosAlunosPeloCursoEStatus = dadosStatus
         } else {
             statusCode = 400
         }
@@ -130,6 +121,4 @@ app.get('/v1/lion-school/alunos/mediaCurso/:matricula', cors(), async function (
 
 app.listen(8080, function () {
     console.log(`Servidor aguardando requisições na porta 8080`);
-
-
 })

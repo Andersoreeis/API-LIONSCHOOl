@@ -70,7 +70,7 @@ function getAlunosPelaMatricula(matricula) {
         return status = false
     }
 }
-function getAlunosPeloCurso(cursoSigla) {
+function getAlunosPeloCurso(cursoSigla, situacao) {
 
     let listaAlunosPeloCursoArray = []
     let listaAlunosPeloCursoJSON = {}
@@ -79,22 +79,27 @@ function getAlunosPeloCurso(cursoSigla) {
     alunosJSON.forEach(function (pegarAlunos) {
         pegarAlunos.curso.forEach(function (pegarCursos) {
             if (pegarCursos.sigla == cursoSigla.toUpperCase()) {
-                listaAlunosPeloCursoArray.push({
-                    nome: pegarAlunos.nome,
-                    foto: pegarAlunos.foto,
-                    matricula: pegarAlunos.matricula,
-                    sexo: pegarAlunos.sexo,
-                    status: pegarAlunos.status,
-                    nomeCurso: pegarCursos.nome,
-                    ano:pegarCursos.conclusao
-                })
+                if(situacao.toUpperCase() == pegarAlunos.status.toUpperCase()){
+                    listaAlunosPeloCursoArray.push({
+                        nome: pegarAlunos.nome,
+                        foto: pegarAlunos.foto,
+                        matricula: pegarAlunos.matricula,
+                        sexo: pegarAlunos.sexo,
+                        status: pegarAlunos.status,
+                        nomeCurso: pegarCursos.nome,
+                        ano:pegarCursos.conclusao
+                    })
+                }
+               
                 listaAlunosPeloCursoJSON.curso = listaAlunosPeloCursoArray
 
                 status = true
             }
         })
+        
     })
     
+
 
     
 
@@ -104,6 +109,7 @@ function getAlunosPeloCurso(cursoSigla) {
         return status = false
     }
 }
+
 function getALunoStatus(situacao) {
     let listaAlunosPelaSituacaoArray = []
     let listaAlunosPelaSituacaoJSON = {}
