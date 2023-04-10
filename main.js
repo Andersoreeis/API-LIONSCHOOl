@@ -73,16 +73,33 @@ function getAlunosPelaMatricula(matricula) {
     }
 }
 
-function getAlunosPeloCurso(cursoSigla, situacao) {
 
-    let listaAlunosPeloCursoArray = []
-    let listaAlunosPeloCursoJSON = {}
-    let status
+
+function getAlunosPeloCurso(cursoSigla, situacao, anoAluno) {
+    let listaAlunosPeloCursoArray = [];
+    let listaAlunosPeloCursoJSON = {};
+    let status = false;
 
     alunosJSON.forEach(function (pegarAlunos) {
         pegarAlunos.curso.forEach(function (pegarCursos) {
-            if (pegarCursos.sigla == cursoSigla.toUpperCase()) {
-                if (situacao == '' || situacao == undefined) {
+            if (pegarCursos.sigla === cursoSigla.toUpperCase()) {
+                let alunoIncluido = false;
+                if (!situacao && !anoAluno) {
+                    alunoIncluido = true;
+                } else if (situacao && anoAluno) {
+                    if (situacao.toUpperCase() === pegarAlunos.status.toUpperCase() && anoAluno == pegarCursos.conclusao) {
+                        alunoIncluido = true;
+                    }
+                } else if (situacao) {
+                    if (situacao.toUpperCase() === pegarAlunos.status.toUpperCase()) {
+                        alunoIncluido = true;
+                    }
+                } else if (anoAluno) {
+                    if (anoAluno == pegarCursos.conclusao) {
+                        alunoIncluido = true;
+                    }
+                }
+                if (alunoIncluido) {
                     listaAlunosPeloCursoArray.push({
                         nome: pegarAlunos.nome,
                         foto: pegarAlunos.foto,
@@ -91,38 +108,22 @@ function getAlunosPeloCurso(cursoSigla, situacao) {
                         status: pegarAlunos.status,
                         nomeCurso: pegarCursos.nome,
                         ano: pegarCursos.conclusao
-                    })
-                } else {
-                    if (situacao.toUpperCase() == pegarAlunos.status.toUpperCase()) {
-
-                        listaAlunosPeloCursoArray.push({
-                            nome: pegarAlunos.nome,
-                            foto: pegarAlunos.foto,
-                            matricula: pegarAlunos.matricula,
-                            sexo: pegarAlunos.sexo,
-                            status: pegarAlunos.status,
-                            nomeCurso: pegarCursos.nome,
-                            ano: pegarCursos.conclusao
-                        })
-                    }
+                    });
+                    status = true;
                 }
-                listaAlunosPeloCursoJSON.curso = listaAlunosPeloCursoArray
-
-                status = true
             }
-
-
-        })
-
-    })
-
+        });
+    });
 
     if (status) {
-        return listaAlunosPeloCursoJSON
+        listaAlunosPeloCursoJSON.curso = listaAlunosPeloCursoArray;
+        return listaAlunosPeloCursoJSON;
     } else {
-        return status = false
+        return false;
     }
 }
+
+
 
 function getALunoStatus(situacao) {
     let listaAlunosPelaSituacaoArray = []
