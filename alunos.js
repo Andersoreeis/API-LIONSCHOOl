@@ -173,6 +173,7 @@ var alunos = [
                     "icone" :   "https://img.icons8.com/ultraviolet/344/thin-client.png",
                     "carga" :   "1200",
                     "conclusao" :   "2021",
+        
                     "disciplinas"   :   [
                         {
                             "nome"  :   "Sistemas Operacionais",
@@ -290,14 +291,23 @@ var alunos = [
                         },
                         {
                             "nome"  :   "Administração de Serviços",
+                            
                             "carga" :   "240",
+                            
                             "media" :   "88",
+                            
                             "status":   "Aprovado"
+                            
                         },
+                        
                         {
+                            
                             "nome"  :   "Projetos",
+                            
                             "carga" :   "400",
+                            
                             "media" :   "99",
+                            
                             "status":   "Aprovado"
                         }
                     ]

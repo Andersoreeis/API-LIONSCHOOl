@@ -20,7 +20,6 @@ function getCursos() { // pega todos os cursos
         status = false
     }
 }
-
 function getTodosAlunos() { // pega todos os alunos
     let listaTodosAlunosArray = []
     let listaTodosAlunosJSON = {}
@@ -45,7 +44,6 @@ function getTodosAlunos() { // pega todos os alunos
     }
 
 }
-
 function getAlunosPelaMatricula(matricula) {
 
     let listaMatriculaArray = []
@@ -72,7 +70,6 @@ function getAlunosPelaMatricula(matricula) {
         return status = false
     }
 }
-
 function getAlunosPeloCurso(cursoSigla) {
 
     let listaAlunosPeloCursoArray = []
@@ -89,7 +86,7 @@ function getAlunosPeloCurso(cursoSigla) {
                     sexo: pegarAlunos.sexo,
                     status: pegarAlunos.status,
                     nomeCurso: pegarCursos.nome,
-                    ano:pegarAlunos.conclusao
+                    ano:pegarCursos.conclusao
                 })
                 listaAlunosPeloCursoJSON.curso = listaAlunosPeloCursoArray
 
@@ -97,6 +94,9 @@ function getAlunosPeloCurso(cursoSigla) {
             }
         })
     })
+    
+
+    
 
     if (status) {
         return listaAlunosPeloCursoJSON
@@ -104,10 +104,6 @@ function getAlunosPeloCurso(cursoSigla) {
         return status = false
     }
 }
-
-
-
-
 function getALunoStatus(situacao) {
     let listaAlunosPelaSituacaoArray = []
     let listaAlunosPelaSituacaoJSON = {}
@@ -135,11 +131,6 @@ function getALunoStatus(situacao) {
         return status = false
     }
 }
-
-
-
-
-
 function getCursoSigla(matricula) { // pega a média e as disciplina de um aluno pela matricula
     let listaCursoEMediaArray = [];
     

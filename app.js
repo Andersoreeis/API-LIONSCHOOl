@@ -126,7 +126,7 @@ app.get('/v1/lion-school/alunos/mediaCurso/:matricula', cors(), async function (
     }
     response.status(statusCode)
     response.json(materiasAluno)
-})
+}) 
 
 app.listen(8080, function () {
     console.log(`Servidor aguardando requisições na porta 8080`);
