@@ -20,6 +20,7 @@ function getCursos() { // pega todos os cursos
         status = false
     }
 }
+
 function getTodosAlunos() { // pega todos os alunos
     let listaTodosAlunosArray = []
     let listaTodosAlunosJSON = {}
@@ -44,6 +45,7 @@ function getTodosAlunos() { // pega todos os alunos
     }
 
 }
+
 function getAlunosPelaMatricula(matricula) {
 
     let listaMatriculaArray = []
@@ -70,6 +72,7 @@ function getAlunosPelaMatricula(matricula) {
         return status = false
     }
 }
+
 function getAlunosPeloCurso(cursoSigla, situacao) {
 
     let listaAlunosPeloCursoArray = []
@@ -79,7 +82,7 @@ function getAlunosPeloCurso(cursoSigla, situacao) {
     alunosJSON.forEach(function (pegarAlunos) {
         pegarAlunos.curso.forEach(function (pegarCursos) {
             if (pegarCursos.sigla == cursoSigla.toUpperCase()) {
-                if(situacao.toUpperCase() == pegarAlunos.status.toUpperCase()){
+                if (situacao == '' || situacao == undefined) {
                     listaAlunosPeloCursoArray.push({
                         nome: pegarAlunos.nome,
                         foto: pegarAlunos.foto,
@@ -87,21 +90,32 @@ function getAlunosPeloCurso(cursoSigla, situacao) {
                         sexo: pegarAlunos.sexo,
                         status: pegarAlunos.status,
                         nomeCurso: pegarCursos.nome,
-                        ano:pegarCursos.conclusao
+                        ano: pegarCursos.conclusao
                     })
+                } else {
+                    if (situacao.toUpperCase() == pegarAlunos.status.toUpperCase()) {
+
+                        listaAlunosPeloCursoArray.push({
+                            nome: pegarAlunos.nome,
+                            foto: pegarAlunos.foto,
+                            matricula: pegarAlunos.matricula,
+                            sexo: pegarAlunos.sexo,
+                            status: pegarAlunos.status,
+                            nomeCurso: pegarCursos.nome,
+                            ano: pegarCursos.conclusao
+                        })
+                    }
                 }
-               
                 listaAlunosPeloCursoJSON.curso = listaAlunosPeloCursoArray
 
                 status = true
             }
+
+
         })
-        
+
     })
-    
 
-
-    
 
     if (status) {
         return listaAlunosPeloCursoJSON
@@ -137,13 +151,14 @@ function getALunoStatus(situacao) {
         return status = false
     }
 }
+
 function getCursoSigla(matricula) { // pega a média e as disciplina de um aluno pela matricula
     let listaCursoEMediaArray = [];
-    
+
     let listaMediaECursoJSON = {}
     let listaCursoJSON = {}
     // let listaDeMateriasEMedia = {}
-    let status = false ;
+    let status = false;
     alunosJSON.forEach(function (pegarAlunos) {
         pegarAlunos.curso.forEach(function (pegarCurso) {
             pegarCurso.disciplinas.forEach(function (nomeCursoSigla) {
@@ -157,10 +172,10 @@ function getCursoSigla(matricula) { // pega a média e as disciplina de um aluno
                         sigla: separar,
                         media: nomeCursoSigla.media
                     });
-                  
-                    listaMediaECursoJSON = listaCursoEMediaArray 
-                 
-                    
+
+                    listaMediaECursoJSON = listaCursoEMediaArray
+
+
 
                     status = true;
                 }

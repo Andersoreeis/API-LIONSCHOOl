@@ -70,7 +70,7 @@ app.get('/v1/lion-school/alunos', cors(), async function (request, response, nex
     let siglaCurso = request.query.curso
     let status = request.query.situacao
 
-    if (siglaCurso != undefined ||  !isNaN(siglaCurso) && status != undefined || status == !isNaN(status)) {
+    if (siglaCurso != undefined ||  !isNaN(siglaCurso) && status == !isNaN(status)) {
 
         let dadosAluno = getsCursosEAlunos.getAlunosPeloCurso(siglaCurso, status)
         if (dadosAluno) {
