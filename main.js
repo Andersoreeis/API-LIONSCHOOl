@@ -30,6 +30,7 @@ function getTodosAlunos() { // pega todos os alunos
 
 
         listaTodosAlunosArray.push({
+            quantidade: pegarAluno.length,
             nome: pegarAluno.nome,
             foto: pegarAluno.foto,
             matricula: pegarAluno.matricula,
