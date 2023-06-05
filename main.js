@@ -102,6 +102,7 @@ function getAlunosPeloCurso(cursoSigla, situacao, anoAluno) {
                 }
                 if (alunoIncluido) {
                     listaAlunosPeloCursoArray.push({
+                        quantidade: pegarAluno.length,
                         nome: pegarAlunos.nome,
                         foto: pegarAlunos.foto,
                         matricula: pegarAlunos.matricula,
