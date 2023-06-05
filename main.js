@@ -30,13 +30,14 @@ function getTodosAlunos() { // pega todos os alunos
 
 
         listaTodosAlunosArray.push({
-            quantidade: pegarAluno.length,
             nome: pegarAluno.nome,
             foto: pegarAluno.foto,
             matricula: pegarAluno.matricula,
             sexo: pegarAluno.sexo
         });
+        listaTodosAlunosJSON.quantidade = listaTodosAlunosArray.length
         listaTodosAlunosJSON.alunos = listaTodosAlunosArray
+
         status = true
     })
     if (status) {
@@ -46,6 +47,8 @@ function getTodosAlunos() { // pega todos os alunos
     }
 
 }
+console.log(getTodosAlunos());
+
 
 function getAlunosPelaMatricula(matricula) {
 
@@ -102,7 +105,6 @@ function getAlunosPeloCurso(cursoSigla, situacao, anoAluno) {
                 }
                 if (alunoIncluido) {
                     listaAlunosPeloCursoArray.push({
-                        quantidade: pegarAluno.length,
                         nome: pegarAlunos.nome,
                         foto: pegarAlunos.foto,
                         matricula: pegarAlunos.matricula,
@@ -118,6 +120,7 @@ function getAlunosPeloCurso(cursoSigla, situacao, anoAluno) {
     });
 
     if (status) {
+        listaAlunosPeloCursoJSON.quantidade = listaAlunosPeloCursoArray
         listaAlunosPeloCursoJSON.curso = listaAlunosPeloCursoArray;
         return listaAlunosPeloCursoJSON;
     } else {
