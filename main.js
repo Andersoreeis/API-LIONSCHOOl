@@ -120,7 +120,7 @@ function getAlunosPeloCurso(cursoSigla, situacao, anoAluno) {
     });
 
     if (status) {
-        listaAlunosPeloCursoJSON.quantidade = listaAlunosPeloCursoArray
+        listaAlunosPeloCursoJSON.quantidade = listaAlunosPeloCursoArray.length
         listaAlunosPeloCursoJSON.curso = listaAlunosPeloCursoArray;
         return listaAlunosPeloCursoJSON;
     } else {
