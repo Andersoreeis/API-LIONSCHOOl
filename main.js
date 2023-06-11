@@ -179,7 +179,7 @@ function getCursoSigla(matricula) { // pega a média e as disciplina de um aluno
                         media: nomeCursoSigla.media
                     });
 
-                    listaMediaECursoJSON = listaCursoEMediaArray
+                    listaMediaECursoJSON.notas = listaCursoEMediaArray
 
 
 
@@ -190,7 +190,7 @@ function getCursoSigla(matricula) { // pega a média e as disciplina de um aluno
     });
 
     if (status) {
-        return listaMediaECursoJSON
+        return listaMediaECursoJSON.notas
     } else {
         return status = false;
     }
