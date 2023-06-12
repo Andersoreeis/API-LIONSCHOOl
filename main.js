@@ -213,7 +213,6 @@ function getCursoSigla(matricula) {
   
     return false;
   }
-console.log(getCursoSigla('20151001001'));  
 
 module.exports = {
     getCursos,
