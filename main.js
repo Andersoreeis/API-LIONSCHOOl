@@ -29,10 +29,10 @@ const getCursosByName = function (nomeDoCurso) {
         if (curso.nome.match(value)) {
             let cursoRegistrado = {}
 
-            cursoRegistrado.nome = nome
-            cursoRegistrado.sigla = sigla
-            cursoRegistrado.icone = icone
-            cursoRegistrado.carga = carga
+            cursoRegistrado.nome = curso.nome
+            cursoRegistrado.sigla = curso.sigla
+            cursoRegistrado.icone = curso.icone
+            cursoRegistrado.carga = curso.carga
 
             listaCursosArray.push(cursoRegistrado)
         }
