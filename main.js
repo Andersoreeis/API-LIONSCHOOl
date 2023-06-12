@@ -24,7 +24,7 @@ const getCursosByName = function(nomeDoCurso) {
     let listaCursosJson = {};
     let listaCursosArray = [];
   
-    if (nomeDoCurso.trim() === "") {
+    if (nomeDoCurso == "" || nomeDoCurso == null || nomeDoCurso == undefined ) {
       // Retorna todos os cursos
       listaCursosJson.cursos = cursosJSON;
       return listaCursosJson;
