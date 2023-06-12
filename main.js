@@ -20,6 +20,33 @@ function getCursos() { // pega todos os cursos
         status = false
     }
 }
+const getCursosByName = function (nomeDoCurso) {
+    let listaCursosJson = false;
+    let listaCursosArray = []
+    let value = new RegExp(nomeDoCurso, 'gi')
+
+    listaCursos.cursos.forEach(function (curso) {
+        if (curso.nome.match(value)) {
+            let cursoRegistrado = {}
+
+            cursoRegistrado.nome = curso.nome
+            cursoRegistrado.sigla = curso.sigla
+            cursoRegistrado.icone = curso.icone
+            cursoRegistrado.carga = curso.carga
+
+            listaCursosArray.push(cursoRegistrado)
+        }
+
+    })
+
+    if (listaCursosArray.length > 0) {
+        listaCursosJson = {}
+        listaCursosJson.cursos = listaCursosArray
+    }
+
+    return listaCursosJson
+}
+
 
 function getTodosAlunos() { // pega todos os alunos
     let listaTodosAlunosArray = []
@@ -47,7 +74,6 @@ function getTodosAlunos() { // pega todos os alunos
     }
 
 }
-console.log(getTodosAlunos());
 
 
 function getAlunosPelaMatricula(matricula) {
@@ -198,6 +224,7 @@ function getCursoSigla(matricula) { // pega a média e as disciplina de um aluno
 
 module.exports = {
     getCursos,
+    getCursosByName,
     getTodosAlunos,
     getAlunosPelaMatricula,
     getAlunosPeloCurso,

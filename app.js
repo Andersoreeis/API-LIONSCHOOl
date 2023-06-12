@@ -36,6 +36,37 @@
          response.status(500)
      }
  })
+ app.get('/v1/lion-school/cursos', cors(), async function (request, response, next) {
+    let statusCode;
+    let dadosEstado = {};
+    let nome = request.query.nome;
+    
+    if(nome != undefined){
+        let cursos = getsCursosEAlunos.getCursosByName(nome)
+
+    if (cursos) {
+        statusCode = 200
+        dadosEstado = cursos
+    } else {
+        statusCode = 500
+    }
+    } else {
+
+    let cursos = alunosCursos.getCursos()
+
+    if (cursos) {
+        statusCode = 200
+        dadosEstado = cursos
+    } else {
+        statusCode = 500
+    }
+    }
+
+    response.status(statusCode)
+    response.json(dadosEstado)
+    
+})
+
  
  app.get('/v1/lion-school/alunos/:matricula', cors(), async function (request, response, next) {
  
