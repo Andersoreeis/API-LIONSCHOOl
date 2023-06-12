@@ -20,32 +20,38 @@ function getCursos() { // pega todos os cursos
         status = false
     }
 }
-const getCursosByName = function (nomeDoCurso) {
-    let listaCursosJson = false;
-    let listaCursosArray = []
-    let value = new RegExp(nomeDoCurso, 'gi')
-
-    cursosJSON.forEach(function (curso) {
-        if (curso.nome.match(value)) {
-            let cursoRegistrado = {}
-
-            cursoRegistrado.nome = curso.nome
-            cursoRegistrado.sigla = curso.sigla
-            cursoRegistrado.icone = curso.icone
-            cursoRegistrado.carga = curso.carga
-
-            listaCursosArray.push(cursoRegistrado)
-        }
-
-    })
-
-    if (listaCursosArray.length > 0) {
-        listaCursosJson = {}
-        listaCursosJson.cursos = listaCursosArray
+const getCursosByName = function(nomeDoCurso) {
+    let listaCursosJson = {};
+    let listaCursosArray = [];
+  
+    if (nomeDoCurso.trim() === "") {
+      // Retorna todos os cursos
+      listaCursosJson.cursos = cursosJSON;
+      return listaCursosJson;
     }
-
-    return listaCursosJson
-}
+  
+    cursosJSON.forEach(function(curso) {
+      if (curso.nome.toLowerCase().includes(nomeDoCurso.toLowerCase())) {
+        let cursoRegistrado = {};
+  
+        cursoRegistrado.nome = curso.nome;
+        cursoRegistrado.sigla = curso.sigla;
+        cursoRegistrado.icone = curso.icone;
+        cursoRegistrado.carga = curso.carga;
+  
+        listaCursosArray.push(cursoRegistrado);
+      }
+    });
+  
+    if (listaCursosArray.length > 0) {
+      listaCursosJson.cursos = listaCursosArray;
+    }
+  
+    return listaCursosJson;
+  };
+  
+  console.log(getCursosByName(' '));
+  
 
 
 function getTodosAlunos() { // pega todos os alunos
