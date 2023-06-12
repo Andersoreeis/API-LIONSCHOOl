@@ -50,7 +50,6 @@ const getCursosByName = function(nomeDoCurso) {
     return listaCursosJson;
   };
   
-  console.log(getCursosByName(' '));
   
 
 
@@ -190,43 +189,31 @@ function getALunoStatus(situacao) {
     }
 }
 
-function getCursoSigla(matricula) { // pega a média e as disciplina de um aluno pela matricula
-    let listaCursoEMediaArray = [];
-
-    let listaMediaECursoJSON = {}
-    let listaCursoJSON = {}
-    // let listaDeMateriasEMedia = {}
-    let status = false;
-    alunosJSON.forEach(function (pegarAlunos) {
-        pegarAlunos.curso.forEach(function (pegarCurso) {
-            pegarCurso.disciplinas.forEach(function (nomeCursoSigla) {
-                if (pegarAlunos.matricula == matricula) {
-                    let separar = "";
-                    const sigla = nomeCursoSigla.nome.split(" ");
-                    for (let i = 0; i < sigla.length; i++) {
-                        separar += sigla[i][0].toUpperCase();
-                    }
-                    listaCursoEMediaArray.push({
-                        sigla: separar,
-                        media: nomeCursoSigla.media
-                    });
-
-                    listaMediaECursoJSON.notas = listaCursoEMediaArray
-
-
-
-                    status = true;
-                }
-            });
+function getCursoSigla(matricula) {
+    const alunoEncontrado = alunosJSON.find(aluno => aluno.matricula === matricula);
+    const listaMediaECursoJSON = {}
+    if (alunoEncontrado) {
+      const listaCursoEMediaArray = alunoEncontrado.curso.flatMap(curso => {
+        return curso.disciplinas.map(disciplina => {
+          const sigla = disciplina.nome
+            .split(" ")
+            .map(word => word[0].toUpperCase())
+            .join("");
+          
+          return {
+            sigla: sigla,
+            media: disciplina.media
+          };
         });
-    });
+      });
+  
+           return listaMediaECursoJSON.notas = listaCursoEMediaArray;
 
-    if (status) {
-        return listaMediaECursoJSON.notas
-    } else {
-        return status = false;
     }
-}
+  
+    return false;
+  }
+console.log(getCursoSigla('20151001001'));  
 
 module.exports = {
     getCursos,
