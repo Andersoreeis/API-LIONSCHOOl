@@ -36,7 +36,7 @@
          response.status(500)
      }
  })
- app.get('/v1/lion-school/cursos', cors(), async function (request, response, next) {
+ app.get('/v1/lion-school/cursosnome', cors(), async function (request, response, next) {
     let statusCode;
     let dadosEstado = {};
     let nome = request.query.nome;
