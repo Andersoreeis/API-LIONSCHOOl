@@ -50,17 +50,7 @@
     } else {
         statusCode = 500
     }
-    } else {
-
-    let cursos = alunosCursos.getCursos()
-
-    if (cursos) {
-        statusCode = 200
-        dadosEstado = cursos
-    } else {
-        statusCode = 500
-    }
-    }
+}
 
     response.status(statusCode)
     response.json(dadosEstado)
