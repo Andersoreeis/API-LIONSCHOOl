@@ -25,14 +25,14 @@ const getCursosByName = function (nomeDoCurso) {
     let listaCursosArray = []
     let value = new RegExp(nomeDoCurso, 'gi')
 
-    listaCursos.cursos.forEach(function (curso) {
+    cursosJSON.forEach(function (curso) {
         if (curso.nome.match(value)) {
             let cursoRegistrado = {}
 
-            cursoRegistrado.nome = curso.nome
-            cursoRegistrado.sigla = curso.sigla
-            cursoRegistrado.icone = curso.icone
-            cursoRegistrado.carga = curso.carga
+            cursoRegistrado.nome = nome
+            cursoRegistrado.sigla = sigla
+            cursoRegistrado.icone = icone
+            cursoRegistrado.carga = carga
 
             listaCursosArray.push(cursoRegistrado)
         }
