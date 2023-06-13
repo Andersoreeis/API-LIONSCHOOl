@@ -189,37 +189,30 @@ function getALunoStatus(situacao) {
     }
 }
 
+User
 function getCursoSigla(matricula) {
     const alunoEncontrado = alunosJSON.find(aluno => aluno.matricula === matricula);
-    const listaCursoEMediaArray = [];
-  
+    const listaMediaECursoJSON = {}
     if (alunoEncontrado) {
-      alunoEncontrado.curso.forEach(curso => {
-        curso.disciplinas.forEach(disciplina => {
+      const listaCursoEMediaArray = alunoEncontrado.curso.flatMap(curso => {
+        return curso.disciplinas.map(disciplina => {
           const sigla = disciplina.nome
             .split(" ")
             .map(word => word[0].toUpperCase())
             .join("");
           
-          const item = {
+          return {
             sigla: sigla,
             media: disciplina.media
           };
-  
-          listaCursoEMediaArray.push(item);
         });
       });
   
-      const static = { static: listaCursoEMediaArray };
-      const jsonString = JSON.stringify(static);
-      const jsonStringWithoutBackslash = jsonString.replace(/\\/g, '');
-      return jsonStringWithoutBackslash;
+           return listaMediaECursoJSON.notas = listaCursoEMediaArray;
+
     }
   
-    return false;
-  }
-  
-  
+}
 
 module.exports = {
     getCursos,
