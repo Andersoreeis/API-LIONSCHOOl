@@ -211,11 +211,14 @@ function getCursoSigla(matricula) {
       });
   
       const static = { static: listaCursoEMediaArray };
-      return JSON.stringify(static);
+      const jsonString = JSON.stringify(static);
+      const jsonStringWithoutBackslash = jsonString.replace(/\\/g, '');
+      return jsonStringWithoutBackslash;
     }
   
     return false;
   }
+  
   
 
 module.exports = {
