@@ -189,7 +189,7 @@ function getALunoStatus(situacao) {
     }
 }
 
-User
+
 function getCursoSigla(matricula) {
     const alunoEncontrado = alunosJSON.find(aluno => aluno.matricula === matricula);
     const listaMediaECursoJSON = {}
