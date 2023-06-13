@@ -217,6 +217,7 @@ function getCursoSigla(matricula) {
     return false;
   }
   
+
 module.exports = {
     getCursos,
     getCursosByName,
