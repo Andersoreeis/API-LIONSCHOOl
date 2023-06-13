@@ -206,15 +206,13 @@ function getCursoSigla(matricula) {
           };
         });
       });
-      listaMediaECursoJSON.notas = listaCursoEMediaArray
   
-           return  listaTodosAlunosJSON;
+           return listaMediaECursoJSON.notas = listaCursoEMediaArray;
 
     }
   
     return false;
   }
- 
 
 module.exports = {
     getCursos,
